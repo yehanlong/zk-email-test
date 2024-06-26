@@ -1,0 +1,21 @@
+{
+  "name": "zkemail-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@zk-email/circuits": "^6.1.2",
+    "@zk-email/contracts": "^6.1.2",
+    "@zk-email/helpers": "^6.1.2",
+    "commander": "^11.1.0",
+    "zk-email-snarkjs": "git+https://github.com/vb7401/snarkjs.git#24981febe8826b6ab76ae4d76cf7f9142919d2b8",
+    "snarkjs":"0.7.4"
+  },
+  "devDependencies": {
+    "@types/pako": "^2.0.3",
+    "circom_tester": "^0.0.19",
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.2",
+    "ffjavascript": "^0.2.59"
+  }
+}
