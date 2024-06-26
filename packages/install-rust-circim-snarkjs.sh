@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ../../
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -14,6 +16,15 @@ install_rust() {
             expect eof
 EOF
 }
+
+# Install expect if not already installed
+if ! command_exists expect; then
+    echo "Installing expect..."
+    sudo apt-get update
+    sudo apt-get install -y expect
+else
+    echo "expect is already installed."
+fi
 
 # Install Rust via rustup if not already installed
 if ! command_exists rustup; then
