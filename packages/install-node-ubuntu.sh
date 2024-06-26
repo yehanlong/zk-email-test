@@ -19,7 +19,7 @@ yarn config set registry https://registry.npm.taobao.org
 set +x
 echo '=================================yarn安装成功================================'
 
-sudo yum install git
+sudo apt-get install git
 git config --global user.name "yehanlong"
 git config --global user.email "952292896@qq.com"
 ssh-keygen -t rsa -C "yehanlong"
