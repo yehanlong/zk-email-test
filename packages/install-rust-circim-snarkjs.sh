@@ -10,7 +10,7 @@ command_exists() {
 install_rust() {
         # Use expect to automate interactive selection
         expect <<EOF
-            spawn curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+            spawn curl -k --proto '=https' https://sh.rustup.rs -sSf | sh
             expect "1) Proceed with standard installation (default - just press enter)"
             send -- "1\r"
             expect eof
