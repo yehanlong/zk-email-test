@@ -49,7 +49,6 @@ cd $BIN_DIR || { echo "目录切换失败"; exit 1; }
 
 execute_command() {
     local index=$1
-    echo "Executing task $index"
     local output_dir="$CIRCOM_FILE_NAME/${OUTPUT_DIR_BASE}-${index}"
 
     mkdir -p "$output_dir"
@@ -63,7 +62,6 @@ execute_command() {
 
     end_time=$(node -e 'console.log(new Date().getTime())')
     elapsed=$((end_time - start_time))
-    echo "Execution task $index time: $elapsed ms"
     echo $elapsed
 } 
 
@@ -93,7 +91,7 @@ parallel_execution() {
 
     wait
 
-    # echo "Execution times: ${times[@]}"
+    echo "Execution times: ${times[@]}"
     calculate_statistics "${times[@]}"
 }
 
