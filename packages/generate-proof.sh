@@ -21,6 +21,7 @@ cd "$WORKING_DIR/helps" || { echo "目录切换失败"; exit 1; }
 
 execute_command() {
     local index=$1
+    echo "Executing task $index"
     local output_dir="${OUTPUT_DIR_BASE}_${index}"
 
     mkdir -p ../"$output_dir"
@@ -31,18 +32,18 @@ execute_command() {
 
     end_time=$(node -e 'console.log(new Date().getTime())')
     elapsed=$((end_time - start_time))
-    echo $elapsed
-}
+    echo "Execution task $index time: $elapsed ms"
+    echo "$elapsed" >> execution_times.txt
+} 
 
 parallel_execution() {
     local i=1
     local running_jobs=0
     local pids=()
-    local times=()
 
     while [ $i -le $NUM_ITERATIONS ] || [ ${#pids[@]} -gt 0 ]; do
         if [ $running_jobs -lt $MAX_PARALLEL ] && [ $i -le $NUM_ITERATIONS ]; then
-            times[i]=$(execute_command $i &)
+            execute_command $i &
             pids+=($!)
             ((i++))
             ((running_jobs++))
@@ -59,42 +60,13 @@ parallel_execution() {
     done
 
     wait
-
-    echo "Execution times: ${times[@]}"
-    calculate_statistics "${times[@]}"
 }
 
 serial_execution() {
-    local times=()
-
     for (( i=1; i<=$NUM_ITERATIONS; i++ ))
     do
-        times[$i]=$(execute_command $i)
+        execute_command $i
     done
-
-    echo "Execution times: ${times[@]}"
-    calculate_statistics "${times[@]}"
-}
-
-calculate_statistics() {
-    local times=("$@")
-    local total_time=0
-    local max_time=0
-    local min_time=999999999
-    local count=${#times[@]}
-
-    for time in "${times[@]}"; do
-        total_time=$((total_time + time))
-        if (( time > max_time )); then max_time=$time; fi
-        if (( time < min_time )); then min_time=$time; fi
-    done
-
-    local avg_time=$((total_time / count))
-
-    echo "Total time: $total_time ms"
-    echo "Average time: $avg_time ms"
-    echo "Max time: $max_time ms"
-    echo "Min time: $min_time ms"
 }
 
 if [ "$MODE" == "parallel" ]; then
@@ -105,4 +77,41 @@ else
     echo "Invalid mode. Use 'parallel' or 'serial'."
     exit 1
 fi
-exit 0
+
+# Wait for all background tasks to complete
+wait
+
+total_time=0
+min_time=
+max_time=
+total_tasks=0
+
+# Read execution times from file and calculate statistics
+while read -r time; do
+    total_time=$((total_time + time))
+    total_tasks=$((total_tasks + 1))
+    
+    # Initialize min_time and max_time
+    if [ -z "$min_time" ] || [ "$time" -lt "$min_time" ]; then
+        min_time=$time
+    fi
+    if [ -z "$max_time" ] || [ "$time" -gt "$max_time" ]; then
+        max_time=$time
+    fi
+done < execution_times.txt
+
+# Calculate average time
+if [ "$total_tasks" -gt 0 ]; then
+    average_time=$((total_time / total_tasks))
+else
+    average_time=0
+fi
+
+# Output statistics
+echo "Total execution time: $total_time ms"
+echo "Minimum execution time: $min_time ms"
+echo "Maximum execution time: $max_time ms"
+echo "Average execution time: $average_time ms"
+
+# Clean up: remove temporary file
+rm execution_times.txt
