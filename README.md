@@ -1,8 +1,8 @@
 # zk-email-test
 
-## 安装步骤
+## 使用步骤
 
-1. 安装依赖：
+1. install：
     ```bash
     yarn install
     ```
@@ -12,7 +12,7 @@
     cd packages
     ```
 
-3. 进行setup.sh：
+3. 进行setup：
     ```bash
     chmod +x setup.sh
     ./setup.sh
@@ -35,3 +35,4 @@
     chmod +x generate-proof-with-rapidsnark.sh
     ./generate-proof-with-rapidsnark.sh
     ```
+7. 其他电路请参考脚本开头注释
