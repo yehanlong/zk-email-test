@@ -59,6 +59,15 @@ else
     echo "snarkjs is already installed."
 fi
 
+# Check if ts-node is already installed
+if ! command_exists ts-node; then
+    # Install ts-node via npm
+    echo "Installing ts-node..."
+    npm install -g ts-node
+else
+    echo "ts-node is already installed."
+fi
+
 # Display circom help information
 # echo "Checking circom installation..."
 # circom --help

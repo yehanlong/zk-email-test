@@ -2,6 +2,7 @@
 
 # # ./setup.sh
 # # ./setup.sh pick-two demo-zk-email-two build-two 
+# # ./setup.sh pick-three demo-zk-email-three build-three
 
 WORKING_DIR=${1:-pick-one}
 CIRCOM_FILE_NAME=${2:-demo-zk-email-one}
