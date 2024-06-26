@@ -33,16 +33,18 @@ execute_command() {
     end_time=$(node -e 'console.log(new Date().getTime())')
     elapsed=$((end_time - start_time))
     echo "Execution task $index time: $elapsed ms"
-} 
+    echo $elapsed
+}
 
 parallel_execution() {
     local i=1
     local running_jobs=0
     local pids=()
+    local times=()
 
     while [ $i -le $NUM_ITERATIONS ] || [ ${#pids[@]} -gt 0 ]; do
         if [ $running_jobs -lt $MAX_PARALLEL ] && [ $i -le $NUM_ITERATIONS ]; then
-            execute_command $i &
+            times[i]=$(execute_command $i &)
             pids+=($!)
             ((i++))
             ((running_jobs++))
@@ -59,13 +61,42 @@ parallel_execution() {
     done
 
     wait
+
+    # echo "Execution times: ${times[@]}"
+    calculate_statistics "${times[@]}"
 }
 
 serial_execution() {
+    local times=()
+
     for (( i=1; i<=$NUM_ITERATIONS; i++ ))
     do
-        execute_command $i
+        times[i]=$(execute_command $i)
     done
+
+    echo "Execution times: ${times[@]}"
+    calculate_statistics "${times[@]}"
+}
+
+calculate_statistics() {
+    local times=("$@")
+    local total_time=0
+    local max_time=0
+    local min_time=999999999
+    local count=${#times[@]}
+
+    for time in "${times[@]}"; do
+        total_time=$((total_time + time))
+        if (( time > max_time )); then max_time=$time; fi
+        if (( time < min_time )); then min_time=$time; fi
+    done
+
+    local avg_time=$((total_time / count))
+
+    echo "Total time: $total_time ms"
+    echo "Average time: $avg_time ms"
+    echo "Max time: $max_time ms"
+    echo "Min time: $min_time ms"
 }
 
 if [ "$MODE" == "parallel" ]; then
@@ -76,3 +107,4 @@ else
     echo "Invalid mode. Use 'parallel' or 'serial'."
     exit 1
 fi
+exit 0
