@@ -21,11 +21,11 @@ program
 program.parse();
 const args = program.opts();
 
-const WORKING_DIR: string = args.workingDir || "pick-two";
-const CIRCUIT_NAME: string = args.circuitName || "demo-zk-email-two";
+const WORKING_DIR: string = args.workingDir || "pick-one";
+const CIRCUIT_NAME: string = args.circuitName || "demo-zk-email-one";
 const SCRIPT_DIR: string = path.join(WORKING_DIR, "/helps");
-const BUILD_DIR: string = args.buildDir || path.join(WORKING_DIR, "/build-two");
-const OUTPUT_DIR: string = args.outputDir || path.join(WORKING_DIR, "/proofs-two-parallel");
+const BUILD_DIR: string = args.buildDir || path.join(WORKING_DIR, "/build-one");
+const OUTPUT_DIR: string = args.outputDir || path.join(WORKING_DIR, "/proofs-one-parallel");
 const THREAD_NUM: number = args.threadNum || 1;
 const ITERATION_NUM: number = args.iterationNum || 1;
 
