@@ -20,7 +20,7 @@ echo "WORKING_DIR: $WORKING_DIR"
 cd "$WORKING_DIR/helps" || { echo "目录切换失败"; exit 1; }
 
 running_start_time=$(node -e 'console.log(new Date().getTime())')
-echo "start_time: $start_time"
+echo "running_start_time: $running_start_time"
 
 execute_command() {
     local index=$1
@@ -86,7 +86,7 @@ fi
 wait
 
 running_end_time=$(node -e 'console.log(new Date().getTime())')
-echo "end_time: $end_time"
+echo "running_end_time: $running_end_time"
 real_avg_time=$(( (running_end_time - running_start_time) / $NUM_ITERATIONS ))
 echo "real_avg_time: $real_avg_time ms" 
 
