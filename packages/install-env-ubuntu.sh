@@ -7,7 +7,7 @@ set -x
 # 安装nodeJs
 if ! command -v node &> /dev/null; then
     echo "Installing Node.js..."
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
     sudo apt-get install -y nodejs
 else
     echo "Node.js is already installed."
