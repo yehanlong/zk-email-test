@@ -99,7 +99,7 @@ for (let i = 0; i < THREAD_NUM; i++) {
     threads.push(async (callback) => {
         console.log(`thread ${i} starts`);
         await generateProof(ITERATION_NUM, i);
-        callback();
+        if (callback) callback();
     });
 }
 
