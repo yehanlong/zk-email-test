@@ -4,17 +4,23 @@ const { generateInputs: generateInputsOne } = require("../pick-one/helps/generat
 const { generateInputs: generateInputsTwo } = require("../pick-two/helps/generate-input-two");
 const { generateInputs: generateInputsThree } = require("../pick-three/helps/generate-input-three");
 
-program
-  .requiredOption("--email-file <string>", "Path to email file")
-  .requiredOption("--output-dir <string>", "output-dir")
-  .requiredOption("--working-dir <string>", "working-dir");
+// program
+//   .requiredOption("--email-file <string>", "Path to email file")
+//   .requiredOption("--output-dir <string>", "output-dir")
+//   .requiredOption("--working-dir <string>", "working-dir");
 
-program.parse();
-const args = program.opts();
+// program.parse();
+// const params = program.opts();
 
-async function inputGenerate() {
+interface InputGenerateParams {
+  emailFile: string;
+  outputDir: string;
+  workingDir: string;
+}
+
+async function inputGenerate(params: InputGenerateParams) {
   
-  const { emailFile, outputDir, workingDir } = args;
+  const { emailFile, outputDir, workingDir } = params;
 
   switch (workingDir) {
     case 'pick-one':
@@ -29,10 +35,11 @@ async function inputGenerate() {
     default:
       throw new Error(`Unknown working-dir: ${workingDir}`);
   }
-  process.exit(0);
 }
 
-inputGenerate().catch((err) => {
-  console.error("Error generating input", err);
-  process.exit(1);
-});
+// inputGenerate().catch((err) => {
+//   console.error("Error generating input", err);
+//   process.exit(1);
+// });
+
+export { inputGenerate, InputGenerateParams };
