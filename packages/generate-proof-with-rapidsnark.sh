@@ -102,14 +102,21 @@ serial_execution() {
 }
 
 if [ "$MODE" == "parallel" ]; then
+    start_time=$(node -e 'console.log(new Date().getTime())')
     parallel_execution
+    end_time=$(node -e 'console.log(new Date().getTime())')
+    real_avg_time=$(( (end_time - start_time) / $NUM_ITERATIONS ))
+    echo "real_avg_time: $real_avg_time ms" 
 elif [ "$MODE" == "serial" ]; then
+    start_time=$(node -e 'console.log(new Date().getTime())')
     serial_execution
+    end_time=$(node -e 'console.log(new Date().getTime())')
+    real_avg_time=$(( (end_time - start_time) / $NUM_ITERATIONS ))
+    echo "real_avg_time: $real_avg_time ms" 
 else
     echo "Invalid mode. Use 'parallel' or 'serial'."
     exit 1
 fi
-exit 0
 
 # Wait for all background tasks to complete
 wait
