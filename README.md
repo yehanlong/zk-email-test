@@ -45,3 +45,19 @@
     npx ts-node generate-proof-parallel.ts --working-dir pick-three --thread-num 2 --iteration-num 2
     ```
 8. 其他电路请参考脚本开头注释
+
+
+## 问题
+#### yarn 报错
+```
+yarn install v1.22.22
+info No lockfile found.
+[1/4] Resolving packages...
+error Error: certificate has expired
+    at TLSSocket.onConnectSecure (node:_tls_wrap:1674:34)
+    at TLSSocket.emit (node:events:519:28)
+    at TLSSocket._finishInit (node:_tls_wrap:1085:8)
+    at ssl.onhandshakedone (node:_tls_wrap:871:12)
+```
+禁用SSL检查即可，因为是临时测试demo，无需严格SSL
+`yarn config set strict-ssl false`
