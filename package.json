@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/pako": "^2.0.3",
+    "@types/async": "^3.2.3",
     "circom_tester": "^0.0.19",
     "circomlib": "^2.0.5",
     "circomlibjs": "^0.1.2",
