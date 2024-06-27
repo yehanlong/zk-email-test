@@ -19,6 +19,9 @@ echo "WORKING_DIR: $WORKING_DIR"
 
 cd "$WORKING_DIR/helps" || { echo "目录切换失败"; exit 1; }
 
+running_start_time=$(node -e 'console.log(new Date().getTime())')
+echo "start_time: $start_time"
+
 execute_command() {
     local index=$1
     echo "Executing task $index"
@@ -70,17 +73,9 @@ serial_execution() {
 }
 
 if [ "$MODE" == "parallel" ]; then
-    start_time=$(node -e 'console.log(new Date().getTime())')
     parallel_execution
-    end_time=$(node -e 'console.log(new Date().getTime())')
-    real_avg_time=$(( (end_time - start_time) / $NUM_ITERATIONS ))
-    echo "real_avg_time: $real_avg_time ms" 
 elif [ "$MODE" == "serial" ]; then
-    start_time=$(node -e 'console.log(new Date().getTime())')
     serial_execution
-    end_time=$(node -e 'console.log(new Date().getTime())')
-    real_avg_time=$(( (end_time - start_time) / $NUM_ITERATIONS ))
-    echo "real_avg_time: $real_avg_time ms" 
 else
     echo "Invalid mode. Use 'parallel' or 'serial'."
     exit 1
@@ -88,6 +83,12 @@ fi
 
 # Wait for all background tasks to complete
 wait
+
+running_end_time=$(node -e 'console.log(new Date().getTime())')
+echo "end_time: $end_time"
+real_avg_time=$(( (running_end_time - running_start_time) / $NUM_ITERATIONS ))
+echo "real_avg_time: $real_avg_time ms" 
+
 
 total_time=0
 min_time=
