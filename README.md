@@ -16,6 +16,8 @@
 3. 进行setup：
     ```bash
     ./setup.sh
+    ./setup.sh pick-two demo-zk-email-two build-two
+    ./setup.sh pick-three demo-zk-email-three build-three
     ```
 
 4. 使用官方snarkjs生成proof(单进程、多进程)：
