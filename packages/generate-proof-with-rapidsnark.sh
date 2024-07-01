@@ -23,7 +23,7 @@ if [ ! -d "$TARGET_DIR" ]; then
     mkdir -p "$TARGET_DIR"
 fi
 
-npx ts-node scripts/input-generate.ts --email-file eml/zkemail-demo-test.eml --output-dir $TARGET_DIR --working-dir $WORKING_DIR
+npx ts-node scripts/input-generate-cli.ts --email-file eml/zkemail-demo-test.eml --output-dir $TARGET_DIR --working-dir $WORKING_DIR
 echo "Input files generated"
 
 SOURCE_JS_DIR="$WORKING_DIR/$BUILD_DIR/${CIRCOM_FILE_NAME}_js/"
