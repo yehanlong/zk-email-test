@@ -47,10 +47,11 @@ copy_if_not_exists "$SOURCE_VKEY_FILE" "$TARGET_DIR"
 
 cd $BIN_DIR || { echo "目录切换失败"; exit 1; }
 
-if [ -d "$SOURCE_JS_DIR" ] && [ "$(ls -A "$SOURCE_JS_DIR")" ]; then
-    echo "Directory $SOURCE_JS_DIR is not empty. Moving files to parent directory..."
+TARGET_JS_DIR="$CIRCOM_FILE_NAME/${CIRCOM_FILE_NAME}_js/"
+if [ -d "$TARGET_JS_DIR" ] && [ "$(ls -A "$TARGET_JS_DIR")" ]; then
+    echo "Directory $TARGET_JS_DIR is not empty. Moving files to parent directory..."
 
-    mv "$SOURCE_JS_DIR"/* "$SOURCE_JS_DIR"/../
+    mv "$TARGET_JS_DIR"/* "$TARGET_JS_DIR"/../
 
     if [ $? -eq 0 ]; then
         echo "Files moved successfully."
