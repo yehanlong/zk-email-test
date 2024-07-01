@@ -41,8 +41,8 @@
     ```bash
     npx ts-node generate-proof-parallel.ts
     npx ts-node generate-proof-parallel.ts --working-dir pick-one --thread-num 2 --iteration-num 2
-    npx ts-node generate-proof-parallel.ts --working-dir pick-two --thread-num 2 --iteration-num 2
-    npx ts-node generate-proof-parallel.ts --working-dir pick-three --thread-num 2 --iteration-num 2
+    npx ts-node generate-proof-parallel.ts --working-dir pick-two --circuit-name demo-zk-email-two   --build-dir build-two --output-dir proofs-two-parallel --thread-num 2 --iteration-num 2
+    npx ts-node generate-proof-parallel.ts --working-dir pick-three --circuit-name demo-zk-email-three --build-dir build-three --output-dir proofs-three-parallel --thread-num 2 --iteration-num 2
     ```
 8. 其他电路请参考脚本开头注释
 

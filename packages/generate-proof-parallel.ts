@@ -7,8 +7,8 @@ const snarkjs = require("snarkjs");
 
 //npx ts-node generate-proof-parallel.ts
 //npx ts-node generate-proof-parallel.ts --working-dir pick-one --thread-num 2 --iteration-num 2
-//npx ts-node generate-proof-parallel.ts --working-dir pick-two --thread-num 2 --iteration-num 2
-//npx ts-node generate-proof-parallel.ts --working-dir pick-three --thread-num 2 --iteration-num 2
+//npx ts-node generate-proof-parallel.ts --working-dir pick-two --circuit-name demo-zk-email-two --build-dir build-two --output-dir proofs-two-parallel --thread-num 2 --iteration-num 2
+//npx ts-node generate-proof-parallel.ts --working-dir pick-three --circuit-name demo-zk-email-three --build-dir build-three --output-dir proofs-three-parallel --thread-num 2 --iteration-num 2
 
 program
   .option("--working-dir <string>", "working-dir")
@@ -24,8 +24,8 @@ const args = program.opts();
 const WORKING_DIR: string = args.workingDir || "pick-one";
 const CIRCUIT_NAME: string = args.circuitName || "demo-zk-email-one";
 const SCRIPT_DIR: string = path.join(WORKING_DIR, "/helps");
-const BUILD_DIR: string = args.buildDir || path.join(WORKING_DIR, "/build-one");
-const OUTPUT_DIR: string = args.outputDir || path.join(WORKING_DIR, "/proofs-one-parallel");
+const BUILD_DIR: string = path.join(WORKING_DIR,args.buildDir) || path.join(WORKING_DIR, "/build-one");
+const OUTPUT_DIR: string = path.join(WORKING_DIR,args.outputDir) || path.join(WORKING_DIR, "/proofs-one-parallel");
 const THREAD_NUM: number = args.threadNum || 1;
 const ITERATION_NUM: number = args.iterationNum || 1;
 
