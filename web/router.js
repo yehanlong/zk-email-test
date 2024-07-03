@@ -42,7 +42,7 @@ router.post("/gen-proof-snarkjs", upload.single("file"), function (req, res) {
       return;
     }
     console.log(`命令执行结果: ${stdout}`);
-    handle(req, res, bodyHash);
+    handle(req, res, "./packages/pick-one/" + bodyHash);
   });
 });
 
@@ -74,20 +74,24 @@ router.post(
         return;
       }
       console.log(`命令执行结果: ${stdout}`);
-      handle(req, res, bodyHash);
+      handle(
+        req,
+        res,
+        "rapidsnark_test/rapidsnark/package/bin/demo-zk-email-one/" + bodyHash,
+      );
     });
   },
 );
 
-async function handle(req, res, bodyHash) {
-  console.log(`handle bodyHash=${bodyHash}`);
+async function handle(req, res, resultPathPrefix) {
+  console.log(`handle resultPathPrefix=${resultPathPrefix}`);
   // 读取结果返回
   const proofData = fs.readFileSync(
-    "./packages/pick-one/" + bodyHash + "_1/proof.json",
+    resultPathPrefix + "_1/proof.json",
     "UTF-8",
   );
   const publicData = fs.readFileSync(
-    "./packages/pick-one/" + bodyHash + "_1/public.json",
+    resultPathPrefix + "_1/public.json",
     "UTF-8",
   );
   let r = { proof: JSON.parse(proofData), public: JSON.parse(publicData) };
@@ -122,7 +126,7 @@ function handleFile(req, res, basePath) {
   });
 
   if (fs.existsSync(proofPath)) {
-    handle(req, res, bodyHash);
+    handle(req, res, `${basePath}/${bodyHash}`);
     return { bodyHash: bodyHash, isOver: true };
   }
 
