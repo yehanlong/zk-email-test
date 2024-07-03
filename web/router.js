@@ -51,12 +51,16 @@ router.post(
   upload.single("file"),
   function (req, res) {
     // req.params 可以获取路径中的参数
-    const { bodyHash, isOver } = handleFile(req, res, "packages/pick-one");
+    const { bodyHash, isOver } = handleFile(
+      req,
+      res,
+      "rapidsnark_test/rapidsnark/package/bin/demo-zk-email-one",
+    );
     if (isOver) return;
 
     // 调用 shell 命令
     // const execPromise = util.promisify(exec);
-    const command = `cd packages && mkdir -p pick-one/${bodyHash}_1 && ./generate-proof-with-rapidsnark.sh pick-one demo-zk-email-one build-one proofs-one 10 parallel 3`;
+    const command = `cd packages && ./generate-proof-with-rapidsnark.sh pick-one demo-zk-email-one build-one ${bodyHash} 1 serial 1 eml/${bodyHash}.eml`;
     console.log(`要执行的命令：${command}`);
     exec(command, (error, stdout, stderr) => {
       if (error) {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # # ./generate-proof-with-rapidsnark.sh
-# # ./generate-proof-with-rapidsnark.sh pick-one demo-zk-email-one build-one proofs-one 10 parallel 3
+# # ./generate-proof-with-rapidsnark.sh pick-one demo-zk-email-one build-one-test proofs-one 10 parallel 3
 # # ./generate-proof-with-rapidsnark.sh pick-two demo-zk-email-two build-two proofs-two 1 serial
 # # ./generate-proof-with-rapidsnark.sh pick-two demo-zk-email-two build-two proofs-two 10 parallel 3
 # # ./generate-proof-with-rapidsnark.sh pick-three demo-zk-email-three build-three proofs-three 1 serial
@@ -14,6 +14,7 @@ OUTPUT_DIR_BASE=${4:-proofs-one}
 NUM_ITERATIONS=${5:-1}
 MODE=${6:-serial}
 MAX_PARALLEL=${7:-3}
+EML_PATH=${8:-eml/zkemail-demo-test.eml}
 
 BIN_DIR=../rapidsnark_test/rapidsnark/package/bin
 
@@ -23,7 +24,7 @@ if [ ! -d "$TARGET_DIR" ]; then
     mkdir -p "$TARGET_DIR"
 fi
 
-npx ts-node scripts/input-generate-cli.ts --email-file eml/zkemail-demo-test.eml --output-dir $TARGET_DIR --working-dir $WORKING_DIR
+npx ts-node scripts/input-generate-cli.ts --email-file $EML_PATH --output-dir $TARGET_DIR --working-dir $WORKING_DIR
 echo "Input files generated"
 
 SOURCE_JS_DIR="$WORKING_DIR/$BUILD_DIR/${CIRCOM_FILE_NAME}_js/"
@@ -66,7 +67,7 @@ echo "running_start_time: $running_start_time"
 execute_command() {
     local index=$1
     echo "Executing task $index"
-    local output_dir="$CIRCOM_FILE_NAME/${OUTPUT_DIR_BASE}-${index}"
+    local output_dir="$CIRCOM_FILE_NAME/${OUTPUT_DIR_BASE}_${index}"
 
     mkdir -p "$output_dir"
 
@@ -74,14 +75,14 @@ execute_command() {
 
     node $CIRCOM_FILE_NAME/generate_witness.js $CIRCOM_FILE_NAME/$CIRCOM_FILE_NAME.wasm $CIRCOM_FILE_NAME/input.json $output_dir/witness.wtns
     wait
-    
+
     ./prover $CIRCOM_FILE_NAME/$CIRCOM_FILE_NAME-final.zkey $output_dir/witness.wtns $output_dir/proof.json $output_dir/public.json
 
     end_time=$(node -e 'console.log(new Date().getTime())')
     elapsed=$((end_time - start_time))
     echo "Execution task $index time: $elapsed ms"
     echo "$elapsed" >> rapidsnark_execution_times.txt
-} 
+}
 
 parallel_execution() {
     local i=1
@@ -131,7 +132,7 @@ wait
 running_end_time=$(node -e 'console.log(new Date().getTime())')
 echo "running_end_time: $running_end_time"
 real_avg_time=$(( (running_end_time - running_start_time) / $NUM_ITERATIONS ))
-echo "real_avg_time: $real_avg_time ms" 
+echo "real_avg_time: $real_avg_time ms"
 
 
 total_time=0
@@ -143,7 +144,7 @@ total_tasks=0
 while read -r time; do
     total_time=$((total_time + time))
     total_tasks=$((total_tasks + 1))
-    
+
     # Initialize min_time and max_time
     if [ -z "$min_time" ] || [ "$time" -lt "$min_time" ]; then
         min_time=$time

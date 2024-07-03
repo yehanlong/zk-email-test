@@ -24,10 +24,14 @@ fi
 
 # 编译
 if [ ! -f "$BUILD_DIR/$CIRCOM_FILE_NAME.r1cs" ]; then
-    echo "开始编译 circom: $BUILD_DIR/$CIRCOM_FILE_NAME.r1cs"
+    echo "开始编译 circom，当前目录 $(pwd)"
     # 编译
     circom -l ../../node_modules circuits/$CIRCOM_FILE_NAME.circom --wasm --r1cs --sym -o $BUILD_DIR
-    echo "circom 编译完成，当前目录: $BUILD_DIR"
+    if $? ;then
+        echo "circom 编译完成，当前目录: $BUILD_DIR"
+    else
+        echo "circom 编译失败"
+    fi
     wait
 else
     echo "已存在 $BUILD_DIR/$CIRCOM_FILE_NAME.r1cs，跳过编译。"
