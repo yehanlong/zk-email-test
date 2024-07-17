@@ -1,0 +1,73 @@
+Delivered-To: jzteam5103@gmail.com
+Received: by 2002:a05:7412:1509:b0:117:a520:3c9a with SMTP id he9csp3091241rdb;
+        Wed, 3 Jul 2024 08:08:15 -0700 (PDT)
+X-Received: by 2002:a05:6870:9216:b0:254:aff3:134a with SMTP id 586e51a60fabf-25db35db267mr10845671fac.39.1720019295325;
+        Wed, 03 Jul 2024 08:08:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1720019295; cv=none;
+        d=google.com; s=arc-20160816;
+        b=iL3TjJhq9wkNHaQ4IcA5SDWhFOmOn89ElZ9GBV21S2Ejzx63eZY3NGILzqF/HKLPYR
+         JUdS1ic7uG/JbxTGzIh8XHvo+PwgOFw0z6VYeQgQStFOGOJ1mq3/x7E+P57shzSXZdVK
+         sTp/txl9xaXb4LveGRX4tKsbP2s1Trd5oMGtZUgHLzIsFQXAXz68/cW/Verelf7Tck/C
+         8phdwaE7DuJeHRPtmbRmmFOcRN0jJL+vomn0JOkZki8ZHT7jjaUJPduG8IiTKfiTgojk
+         Xavbv/EpHvu2HkI8pAaj9sYqJIvB0tVfQmXPW3tRj20XiftJY9ZhvUaYYFOn+c0M1as+
+         rfcw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=P/V9r+gSnshrqyouvET2ZTMaZHIaG3js7UWlY7Ulq8A=;
+        fh=RHH6w89R3typmRM9SCOY2eUJbMeUB+PoNk7vHyTkXM8=;
+        b=uWMP+15xGHXsis+OxzQOqSpxWhL4oAbWeQggl5KVaf64PeIAgK4fA+rzeOBtjLnIpI
+         myjgt4wXHK6ADvLMtdslIKv+xGqUvXPpyUjrXqKZ9fie2sNl0yEzXkvH8wfRaBhxbhr9
+         flJgArKd7A9rbRFkh+tC2p/mhBjKkION+Tz8OnpLa+g+93k5IDqh+R8rfH6AMdEF5Ego
+         DhfXOdmsT4xnULsZ/aR5Ll2rVRCu6zXM+Ub55re/q6k8YINyHfcnqYLbpEzwGBbsbXjg
+         66RQ8L7JsXm186S6OLxNI9gkDR9t2LVOxp/35KIf1OUE188QMPn4ZmCYhoOm+dBW6n5d
+         +IfA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=KcXEAPR7;
+       spf=pass (google.com: domain of zhujizhi1012@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=zhujizhi1012@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <zhujizhi1012@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 586e51a60fabf-25e21d74f5csor39315fac.4.2024.07.03.08.08.15
+        for <jzteam5103@gmail.com>
+        (Google Transport Security);
+        Wed, 03 Jul 2024 08:08:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of zhujizhi1012@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=KcXEAPR7;
+       spf=pass (google.com: domain of zhujizhi1012@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=zhujizhi1012@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1720019294; x=1720624094; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=P/V9r+gSnshrqyouvET2ZTMaZHIaG3js7UWlY7Ulq8A=;
+        b=KcXEAPR7cgdd1oVe3nE02D0drAFOnz+H9r0tNtQWkq7rV/LidAkBwB0vbsLty3bPW3
+         V/26pb7jEUENgQjTl+o3jH0DE8E3iJHKe3fkeEYuTYfcm206EUlaYj5fAMg4ZdjLuAhl
+         c9s6WDpvv0e70l0onIej4j1zvzQkWtUGroJXdK4zNq3CHZW+36vbWMO7Rn0Ysvv1ZIA8
+         j7oJe23fP+KdUdCFJDo8vJCatwZYioX96yT2ZnxrSoega7E1wiHbLeTyQPlTCeqf4ZQ/
+         0MXx1DL972jHF6NOHBxadKmk4hObKPGK4pwkPHS1fTt8GRHERhibonaA/2lN+RDSEx+A
+         dMLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1720019294; x=1720624094;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=P/V9r+gSnshrqyouvET2ZTMaZHIaG3js7UWlY7Ulq8A=;
+        b=MRxD8ywG5XKgzB66gJ8+1bnHzeydJhuRTWoKCD8kCjRYm8KhyaTUc7BSaju7qbWEnA
+         Vzsjv9L8EZH3hFK83YOtJq2ooukKItOkdr9zcCAnbFjRoEEgAOK9sftYscUc7KMy/mOd
+         F1q2IAulVp5qsXQd5vigFtMcjbL4sjxoTD8YTbKCgjyUxi0xNO3U3eH+Tw8h7Ce52lNJ
+         FEyds7XSqpj913nrJ3rBt8BEkpDgnrmgwgqBJIOjegBoErW+R6kpwHD1/62vdMxCTtXJ
+         1eMFocO7p3dqq9Pu2SA6113HzCdtG0kg/g0HpkzuWOOtvuhA/ofVZzbNLGoBRCs9MaYU
+         bM4g==
+X-Gm-Message-State: AOJu0YxaFaXi5SVIiiRlmIVePNIh3Kvi+wnF9iILRt+JSnpk7uLmRX1P U5pYD+G7cEevZvc+p6pOVUpIaGszqqvmMuONAJrWlMyludppdrOGhhAoQ0lo4wP0WE5dLw9sFLE Ohy2OQJanKDZKNt9HPn9amVZD9165aBaTKvEkLg==
+X-Google-Smtp-Source: AGHT+IFpg0Ayi2wowODTeHyriS/D2ggYXJJqhoAoIr6szjG6wlU2t+pBq68S+rE6uApQ11TG1Xj3V8Gu9pR42N2n9rg=
+X-Received: by 2002:a05:6870:a511:b0:254:6e4e:23d7 with SMTP id 586e51a60fabf-25db362e2a7mr11277902fac.50.1720019294468; Wed, 03 Jul 2024 08:08:14 -0700 (PDT)
+MIME-Version: 1.0
+From: Jzteam <zhujizhi1012@gmail.com>
+Date: Wed, 3 Jul 2024 23:08:03 +0800
+Message-ID: <CANasdFN6QqMXMo3AT6+gcHYK-Wo_tTA5kwS-HfNLQH5O9c8pvw@mail.gmail.com>
+Subject: test11
+To: jzteam5103@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+
+OKC certify that you are @jzteam02

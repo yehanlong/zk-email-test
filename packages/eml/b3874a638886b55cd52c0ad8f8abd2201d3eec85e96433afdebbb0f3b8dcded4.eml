@@ -1,0 +1,84 @@
+Delivered-To: zhujizhi1012@gmail.com
+Received: by 2002:a05:6358:1a99:b0:19f:6ee7:abdd with SMTP id gm25csp2600232rwb;
+        Wed, 3 Jul 2024 07:47:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGXZUQaAVEMVFCu5gttVinkAJDLGTmSXebLF5Wdp+reG4QOFabiPwxbWUc2H+Mjh9I/p6Cq
+X-Received: by 2002:a05:620a:e8b:b0:79d:53b5:9e94 with SMTP id af79cd13be357-79d7bae7d9amr1393386885a.63.1720018060293;
+        Wed, 03 Jul 2024 07:47:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1720018060; cv=none;
+        d=google.com; s=arc-20160816;
+        b=bc7riuuHo56H5NacbYvmZ6ZLhf2YmQnvTKhhXnMb2w/wvL1365BiI4kOZvBhuWDy8R
+         77/QDlPAkvJjoVLSvuLvqCuN1n5eZW295mzdAw45VgWp9fCgpO7NkHfsuX5/61xrLHGK
+         naAEVpsZq2JCWlpSe3ZS9m9uZnIlydpRoRyJoPeY19Cvbj3pFMxuIOLqOsGIzAlE7NtP
+         7Jmt9EBK+nf0seAEK+T9gQT8tEYJdTzRXTT5Z5LNFFpz8UMOhNuARzHvzuAOF/ubv0zj
+         cL7AqOHKXUyuRzJiUMe5ZeMb2WVqyemQB+wVt+GlOhWrY51USZ5iNhLIkK5KwGLa/80H
+         MmQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=from:message-id:feedback-id:mime-version:subject:to:date
+         :dkim-signature;
+        bh=ei7gm8ZAwwl15D9jgj9Bya3a/WPHBQpQDwBkIjLTv5M=;
+        fh=7j/gwrP2t8V+koZwzIyGNAOTRRVD84BuGeCQ5l7dHzA=;
+        b=0pXLNBxF1OH88jaF/bCFBhpePNWC/wdjG++KgfsxmT4w7QRzAxrSzoWJ2nqq18XpS6
+         7v0ylqhGiM7XwG2gOoaEUUeLqODsGM6zheHn3vYaJp4BzKYUt0ED6vK+4dMiHyFN040a
+         246poWeyY9WDNrj6P91ND1yEZShl4gr+Gk7aIoBi1VAEWIC7GYrxLCPjpPRz4MaH0miN
+         4WGzkDMDeRdyDOGIO3HOCunVNVA5KMUGnFArWqjmg/XhYPwWYlhE5U/J2eTZi1vHBppy
+         B2dfAu9yDYiIihyasxeGZRPO5Tt7eWckBJPvmvwij/4+xC8J80T/zs+ptg5sYv6ryFkk
+         ADxg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@okg.com header.s=lark2312150143 header.b=IQaC7wKZ;
+       spf=pass (google.com: domain of jizhi.zhu@okg.com designates 130.44.212.60 as permitted sender) smtp.mailfrom=jizhi.zhu@okg.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=okg.com
+Return-Path: <jizhi.zhu@okg.com>
+Received: from va-4-60.ptr.blmpb.com (va-4-60.ptr.blmpb.com. [130.44.212.60])
+        by mx.google.com with ESMTPS id af79cd13be357-79d6933b365si1235189485a.661.2024.07.03.07.47.40
+        for <zhujizhi1012@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 03 Jul 2024 07:47:40 -0700 (PDT)
+Received-SPF: pass (google.com: domain of jizhi.zhu@okg.com designates 130.44.212.60 as permitted sender) client-ip=130.44.212.60;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@okg.com header.s=lark2312150143 header.b=IQaC7wKZ;
+       spf=pass (google.com: domain of jizhi.zhu@okg.com designates 130.44.212.60 as permitted sender) smtp.mailfrom=jizhi.zhu@okg.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=okg.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=lark2312150143; d=okg.com; t=1720018056; h=from:subject: mime-version:from:date:message-id:subject:to:cc:reply-to:content-type: mime-version:in-reply-to:message-id; bh=ei7gm8ZAwwl15D9jgj9Bya3a/WPHBQpQDwBkIjLTv5M=; b=IQaC7wKZ2fgs3hb19SopzVU/QbClgIA7Lba2n+BbNhNoD9Co3n1bOXJwUtgU531lW4cdN5 6Dsnv0jwLEAeLR8bamNsEcBlm4WoQp8/T6gYfymyOSqMXiucYq1aj7OGXb8ZQC9XrjgjEY S8gbTNJB7lttdUM5+f+VPoPLmdMvdK7Idfky0iW6sC7BwL3sXqu3QToWmG9tR7U0TS9bfu L8RYnyuIBYDX2Og+OveODWaRdzMClDrtg9Qw0iRnQJ7lQsOv5OFn92rRAPJOTTdj79YHD/ fieroRhPwN3FiEU5glmhoc070425m9vaphl5itu9d5ch4u4CcM++FzcwRFzlWw==
+Date: Wed, 03 Jul 2024 14:47:35 +0000
+To: Jzteam <zhujizhi1012@gmail.com>
+Subject: test zk email deo
+Mime-Version: 1.0
+Feedback-Id: okg.com:1:all:larkmailservice
+Message-Id: <c9f0bc5e63bf519f2bdf52e1a6cb27559924066d.4eb3f846.9a68.4f65.90e0.e3e9568408ea@larksuite.com>
+From: "朱继志" <jizhi.zhu@okg.com>
+X-Lms-Return-Path: <lba+166856488+204fef+gmail.com+jizhi.zhu@okg.com>
+Content-Type: multipart/alternative; boundary=72ac6f9dd519cedf6a8f1406fe752ab71899410ba8d2b0c9e6c60dd01294
+
+--72ac6f9dd519cedf6a8f1406fe752ab71899410ba8d2b0c9e6c60dd01294
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+
+OKC certify that you are @jzteam01 and your address is
+0x32Be343B94f860124dC4fEe278FDCBD38C102D88.
+We confirm that a transfer of 100 ETH has been made to your address.
+We will not disclose any of your information!
+--72ac6f9dd519cedf6a8f1406fe752ab71899410ba8d2b0c9e6c60dd01294
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<div id=3D"editor_version_7.19.1_kDU8uQJy" style=3D"word-break:break-word;"=
+><div data-zone-id=3D"0" data-line-index=3D"0" data-line=3D"true" style=3D"=
+margin-top: 4px; margin-bottom: 4px; line-height: 1.6;"><div dir=3D"auto" s=
+tyle=3D"font-size: 14px;"><span style=3D"font-size: 14px;"><span style=3D"c=
+olor: rgb(0, 0, 0);">OKC certify that you are @jzteam01 and your address is=
+</span></span></div></div><div data-zone-id=3D"0" data-line-index=3D"1" dat=
+a-line=3D"true" style=3D"margin-top: 4px; margin-bottom: 4px; line-height: =
+1.6;"><div dir=3D"auto" style=3D"font-size: 14px;"><span style=3D"font-size=
+: 14px;"><span style=3D"color: rgb(0, 0, 0);">0x32Be343B94f860124dC4fEe278F=
+DCBD38C102D88.</span></span></div></div><div data-zone-id=3D"0" data-line-i=
+ndex=3D"2" data-line=3D"true" style=3D"margin-top: 4px; margin-bottom: 4px;=
+ line-height: 1.6;"><div dir=3D"auto" style=3D"font-size: 14px;"><span styl=
+e=3D"font-size: 14px;"><span style=3D"color: rgb(0, 0, 0);">We confirm that=
+ a transfer of 100 ETH has been made to your address.</span></span></div></=
+div><div data-zone-id=3D"0" data-line-index=3D"3" data-line=3D"true" style=
+=3D"margin-top: 4px; margin-bottom: 4px; line-height: 1.6;"><div dir=3D"aut=
+o" style=3D"font-size: 14px;"><span style=3D"font-size: 14px;"><span style=
+=3D"color: rgb(0, 0, 0);">We will not disclose any of your information!</sp=
+an></span></div></div></div>
+--72ac6f9dd519cedf6a8f1406fe752ab71899410ba8d2b0c9e6c60dd01294--

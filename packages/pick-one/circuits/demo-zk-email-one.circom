@@ -76,7 +76,7 @@ template ZKEmail(maxHeadersLength, maxBodyLength, n, k, exposeFrom) {
     // Pack the username to int
     var maxUsernameLength = 21;
     signal usernamePacks[1] <== PackRegexReveal(maxBodyLength, maxUsernameLength)(usernameReveal, usernameIndex);
-   
+
     // Username will fit in one field element, so we take the first item from the packed array.
     username <== usernamePacks[0];
 }
