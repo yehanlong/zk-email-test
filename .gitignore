@@ -1,4 +1,5 @@
 node_modules/
-packages/powersOfTau28_hez_final_22.ptau
+packages/powersOfTau28_hez_final_*.ptau
 rapidsnark_test
 packages/pick-*/build-*
+.idea/*
