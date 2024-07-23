@@ -11,7 +11,7 @@ const {
 } = require("../pick-three/helps/generate-input-three");
 const {
   generateInputs: generateInputsSixBig,
-} = require("../pick-three/helps/generate-input-six-big");
+} = require("../pick-six-big/helps/generate-input-six-big");
 
 program
   .requiredOption("--email-file <string>", "Path to email file")
