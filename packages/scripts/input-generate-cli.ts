@@ -9,6 +9,9 @@ const {
 const {
   generateInputs: generateInputsThree,
 } = require("../pick-three/helps/generate-input-three");
+const {
+  generateInputs: generateInputsSixBig,
+} = require("../pick-three/helps/generate-input-six-big");
 
 program
   .requiredOption("--email-file <string>", "Path to email file")
@@ -32,7 +35,7 @@ async function inputGenerate() {
       await generateInputsThree(emailFile, outputDir);
       break;
     case "pick-six-big":
-      await generateInputsThree(emailFile, outputDir);
+      await generateInputsSixBig(emailFile, outputDir);
       break;
     default:
       throw new Error(`Unknown working-dir: ${workingDir}`);

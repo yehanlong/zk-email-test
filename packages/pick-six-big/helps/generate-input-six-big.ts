@@ -24,11 +24,12 @@ export type CircuitInputs = {
 
 export async function generateInputs(
   email_dir: string,
-  output_dir: string
+  output_dir: string,
 ): Promise<CircuitInputs> {
   const email = Buffer.from(fs.readFileSync(email_dir, "utf8"));
   const emailVerifierInputs = await generateEmailVerifierInputs(email, {
     shaPrecomputeSelector: STRING_PRESELECTOR,
+    maxBodyLength: 12288,
   });
   // console.log("emailVerifierInputs",JSON.stringify(emailVerifierInputs));
 
@@ -41,16 +42,18 @@ export async function generateInputs(
   if (usernameIndex !== -1) {
     usernameIndex += selectorBuffer.length;
     // console.log("usernameIndex",usernameIndex.toString());
-  } else{
+  } else {
     throw new Error("usernameIndex not found");
   }
   const bodyRemainingString1 = String.fromCharCode(...bodyRemaining);
   const selectorBufferAddress = Buffer.from(STRING_PRESELECTOR_ADDRESS);
-  var evmAddressIndex = Buffer.from(bodyRemaining).indexOf(selectorBufferAddress);
+  var evmAddressIndex = Buffer.from(bodyRemaining).indexOf(
+    selectorBufferAddress,
+  );
   if (evmAddressIndex !== -1) {
     evmAddressIndex = evmAddressIndex + selectorBufferAddress.length + 2;
     // console.log("evmAddressIndex",evmAddressIndex.toString());
-  }else{
+  } else {
     throw new Error("evmAddressIndex not found");
   }
 
@@ -59,7 +62,7 @@ export async function generateInputs(
   if (amountIndex !== -1) {
     amountIndex = amountIndex + selectorBufferAmount.length + 4;
     // console.log("amountIndex",amountIndex.toString());
-  }else{
+  } else {
     throw new Error("amountIndex not found");
   }
 
@@ -68,36 +71,36 @@ export async function generateInputs(
   let fromEmailIndex = Buffer.from(header).indexOf(selectorBufferFrom);
   // console.log("fromEmailIndex", fromEmailIndex.toString());
   if (fromEmailIndex !== -1) {
-      fromEmailIndex += selectorBufferFrom.length;
-      // Continue searching for '<' symbol
-      let foundIndex = -1;
-      for (let i = fromEmailIndex; i < header.length; i++) {
-          if (header[i] === '<'.charCodeAt(0)) {
-              foundIndex = i;
-              break;
-          }
+    fromEmailIndex += selectorBufferFrom.length;
+    // Continue searching for '<' symbol
+    let foundIndex = -1;
+    for (let i = fromEmailIndex; i < header.length; i++) {
+      if (header[i] === "<".charCodeAt(0)) {
+        foundIndex = i;
+        break;
       }
+    }
 
-      if (foundIndex !== -1) {
-          fromEmailIndex = foundIndex + 1;
-          // console.log("final fromEmailIndex:", fromEmailIndex);
-      } else {
-          throw new Error("Could not find '<' after fromEmailIndex");
-      }
-  }else{
+    if (foundIndex !== -1) {
+      fromEmailIndex = foundIndex + 1;
+      // console.log("final fromEmailIndex:", fromEmailIndex);
+    } else {
+      throw new Error("Could not find '<' after fromEmailIndex");
+    }
+  } else {
     throw new Error("fromEmailIndex not found");
   }
 
   const circuitInputs = {
     ...emailVerifierInputs,
     usernameIndex: usernameIndex.toString(),
-    evmAddressIndex : evmAddressIndex.toString(),
-    fromEmailIndex : fromEmailIndex.toString(),
-    amountIndex : amountIndex.toString(),
+    evmAddressIndex: evmAddressIndex.toString(),
+    fromEmailIndex: fromEmailIndex.toString(),
+    amountIndex: amountIndex.toString(),
   };
   fs.writeFileSync(
     path.join(output_dir, "input.json"),
-    JSON.stringify(circuitInputs, null, 2)
+    JSON.stringify(circuitInputs, null, 2),
   );
   return circuitInputs;
 }
