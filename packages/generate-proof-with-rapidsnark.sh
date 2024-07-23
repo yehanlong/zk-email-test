@@ -6,6 +6,7 @@
 # # ./generate-proof-with-rapidsnark.sh pick-two demo-zk-email-two build-two proofs-two 10 parallel 3
 # # ./generate-proof-with-rapidsnark.sh pick-three demo-zk-email-three build-three proofs-three 1 serial
 # # ./generate-proof-with-rapidsnark.sh pick-three demo-zk-email-three build-three proofs-three 10 parallel 3
+# # ./generate-proof-with-rapidsnark.sh pick-six-big demo-zk-email-six-big build-six-big proofs-six-big 1 serial 1
 
 WORKING_DIR=${1:-pick-one}
 CIRCOM_FILE_NAME=${2:-demo-zk-email-one}

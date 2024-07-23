@@ -38,7 +38,7 @@ fi
 # 安装 Rust
 if ! command -v rustup &> /dev/null; then
     echo "Installing Rust via rustup..."
-    curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+    curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y && wait
     # . $HOME/.cargo/env
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
     source ~/.bashrc
